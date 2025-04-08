@@ -10,7 +10,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.jlopez.rickandmortyapp.domain.model.CharacterDetail
 import com.jlopez.rickandmortyapp.ui.screen.components.ErrorScreen
 import com.jlopez.rickandmortyapp.ui.screen.components.LoadingScreen

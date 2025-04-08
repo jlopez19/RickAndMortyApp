@@ -23,12 +23,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.ImageLoader
+import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
+import coil.request.CachePolicy
+import coil.request.ImageRequest
 import com.jlopez.rickandmortyapp.domain.model.Characters
+import com.jlopez.rickandmortyapp.ui.screen.components.AsyncImageWithPreview
 import com.jlopez.rickandmortyapp.ui.screen.components.ErrorScreen
 import com.jlopez.rickandmortyapp.ui.screen.components.LoadingScreen
 
@@ -59,6 +65,15 @@ fun CharacterScreen (onCharacterClick: (Int) -> Unit,
 
 @Composable
 fun CharacterListItem(character: Characters, onCharacterClick: (Int) -> Unit) {
+    val imageLoader = ImageLoader.Builder(LocalContext.current)
+        .diskCachePolicy(CachePolicy.ENABLED)
+        .memoryCachePolicy(CachePolicy.ENABLED)
+        .build()
+    val request = ImageRequest.Builder(LocalContext.current)
+        .data(character.image)
+        .diskCachePolicy(CachePolicy.ENABLED)
+        .memoryCachePolicy(CachePolicy.ENABLED)
+        .build()
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -71,15 +86,16 @@ fun CharacterListItem(character: Characters, onCharacterClick: (Int) -> Unit) {
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = rememberAsyncImagePainter(character.image),
+            AsyncImageWithPreview(
+                model = character.image,
                 contentDescription = character.name,
-                modifier = Modifier
+                modifier =Modifier
                     .size(60.dp)
                     .clip(CircleShape)
                     .background(Color.Gray),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
             )
+
             Spacer(modifier = Modifier.width(16.dp))
 
             Column {
