@@ -15,9 +15,9 @@ class CharacterRepositoryImpl @Inject constructor(
     private val characterMapper: CharacterMapper
 ) : CharacterRepository {
 
-    override suspend fun getCharacters(): Result<List<Characters>> {
+    override suspend fun getCharacters(name: String): Result<List<Characters>> {
         try {
-            val response = remoteDataSource.getCharacters()
+            val response = remoteDataSource.getCharacters(name)
             return Result.Success(characterMapper.mapToDomain(response))
         } catch (e: HttpException) {
             return   Result.Error(
@@ -49,4 +49,5 @@ class CharacterRepositoryImpl @Inject constructor(
             )
         }
     }
+
 }
