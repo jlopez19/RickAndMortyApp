@@ -1,7 +1,6 @@
 package com.jlopez.rickandmortyapp.domain.usecase
 
 import com.jlopez.rickandmortyapp.domain.repository.CharacterRepository
-import com.jlopez.rickandmortyapp.domain.model.Character
 import com.jlopez.rickandmortyapp.domain.model.CharacterDetail
 import com.jlopez.rickandmortyapp.utils.Result
 

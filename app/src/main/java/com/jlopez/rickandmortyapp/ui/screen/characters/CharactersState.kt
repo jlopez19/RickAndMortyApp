@@ -1,7 +1,6 @@
 package com.jlopez.rickandmortyapp.ui.screen.characters
 
 import com.jlopez.rickandmortyapp.domain.model.Characters
-import com.jlopez.rickandmortyapp.utils.Result
 
 data class CharactersState(
     val characters: List<Characters>? = emptyList(),
